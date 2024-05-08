@@ -7,34 +7,50 @@ const collectEmployees = function() {
 const employee = [];
 let i = true;
 while(i) {
-  const employeeFirst = prompt("enter First Name");
-  const employeelast = prompt("enter Last Name");
-  const employeeSalary = prompt("enter Salary");
-  if (isNaN(employeeSalary));
-  employeeSalary = 0;
+  const employeeFirst = prompt("Enter First Name");
+  const employeeLast = prompt("Enter Last Name");
+  let employeeSalary = prompt("Enter employeeSalary");
+  if (isNaN(employeeSalary)){
+    employeeSalary = 0;
+  }
+ // Employee Object
   const emp = {
     firstName: employeeFirst,
-    LastName: employeelast,
-    salary: employeeSalary
+    lastName: employeeLast,
+    employeeSalary: parseFloat(employeeSalary),
   }
-  employee.push(emp);
-i = confirm
-}
+  employee.push(emp); 
+  console.log(emp);
+  i = confirm(`do you want to add another employee?`);
 }
 
-// Display the average salary
-const displayAverageSalary = function(employeesArray) {
-  // TODO: Calculate and display the average salary
+return employee;
+}
 
+// Display the average employeeSalary
+const displayAverageemployeeSalary = function(employeesArray) {
+  // TODO: Calculate and display the average employeeSalary
+  let sumemployeeSalary = 0;
+const numberOfEmployees = employeesArray.length;
+
+for(const emp of employeesArray){
+  sumemployeeSalary += emp.employeeSalary
+}
+
+// four-loop
+const averageemployeeSalary = sumemployeeSalary / numberOfEmployees;
+console.log (`the average employeeSalary between out ${numberOfEmployees} employees is $${averageemployeeSalary},`);
 }
 
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
+  const randomIndex = employeesArray[Math.floor(Math.random() * employeesArray.length)];
+  console.log (`Congratulations to ${randomIndex.firstName} ${randomIndex.lastName}, our randon drawing winner!`);
 }
 
-/*
-  ====================
+  /*
+  =============================================
   STARTER CODE
   Do not modify any of the code below this line:
 */
@@ -61,14 +77,14 @@ const displayEmployees = function(employeesArray) {
     lastNameCell.textContent = currentEmployee.lastName;
     newTableRow.append(lastNameCell);
 
-    const salaryCell = document.createElement("td");
-    // Format the salary as currency
-    salaryCell.textContent = currentEmployee.salary.toLocaleString("en-US",{
+    const employeeSalaryCell = document.createElement("td");
+    // Format the employeeSalary as currency
+    employeeSalaryCell.textContent = currentEmployee.employeeSalary.toLocaleString("en-US",{
       style:"currency",
       currency:"USD"
     });
 
-    newTableRow.append(salaryCell);
+    newTableRow.append(employeeSalaryCell);
 
     employeeTable.append(newTableRow);
   }
@@ -79,7 +95,7 @@ const trackEmployeeData = function() {
 
   console.table(employees);
 
-  displayAverageSalary(employees);
+  displayAverageemployeeSalary(employees);
 
   console.log('==============================');
 
@@ -95,7 +111,5 @@ const trackEmployeeData = function() {
 
   displayEmployees(employees);
 }
-
 // Add event listener to 'Add Employees' button
 addEmployeesBtn.addEventListener('click', trackEmployeeData);
-
